@@ -1,0 +1,24 @@
+<VirtualHost *:80>
+    ServerName  164.92.114.61
+    ServerAdmin email@mywebsite.com
+
+    DocumentRoot /var/www/content_site
+
+    WSGIDaemonProcess content_site python-home=/var/www/120api/venv python-path=/var/www/120api
+    WSGIScriptAlias / /var/www/120api/wsgi.py
+
+    <Directory /var/www/120api>
+        WSGIProcessGroup content_site
+        WSGIApplicationGroup %{GLOBAL}
+        Require all granted
+    </Directory>
+
+    Alias /static /var/www/120api/static
+    <Directory /var/www/120api/static>
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    LogLevel warn
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
