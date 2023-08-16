@@ -2,7 +2,7 @@
     ServerName  164.92.114.61
     ServerAdmin email@mywebsite.com
 
-    DocumentRoot /var/www/content_site
+    DocumentRoot /var/www/120api
 
     WSGIDaemonProcess content_site python-home=/var/www/120api/venv python-path=/var/www/120api
     WSGIScriptAlias / /var/www/120api/wsgi.py
