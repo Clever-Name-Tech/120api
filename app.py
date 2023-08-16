@@ -25,8 +25,14 @@ def forward_request(time_int):
 
 @app.route('/forward-url-encoded/<time_int>', methods=['GET', 'POST'])
 def forward_request_url_encoded(time_int):
-    # Extract parameters from the request if needed
-    params = request.form
+    # Extract parameters from the request's query string
+    query_params = request.args.to_dict()
+
+    # Extract parameters from the request's body (form data)
+    form_params = request.form.to_dict()
+
+    # Combine query parameters and form parameters
+    params = {**query_params, **form_params}
 
     posting_url = get_posting_url()
 
