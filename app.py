@@ -6,7 +6,7 @@ from config import get_posting_url
 app = Flask(__name__)
 
 
-@app.route('/forward', methods=['POST'])
+@app.route('/forward', methods=['GET', 'POST'])
 def forward_request():
     # Extract parameters from the request if needed
     params = request.json
@@ -22,7 +22,7 @@ def forward_request():
     return response.text
 
 
-@app.route('/forward-url-encoded', methods=['POST'])
+@app.route('/forward-url-encoded', methods=['GET', 'POST'])
 def forward_request_url_encoded():
     # Extract parameters from the request if needed
     params = request.form
@@ -38,7 +38,7 @@ def forward_request_url_encoded():
     return response.text
 
 
-@app.route('/toggle-debug')
+@app.route('/toggle-debug', methods=['GET', 'POST'])
 def toggle_debug():
     # Import the current DEBUG value
     try:
@@ -56,7 +56,7 @@ def toggle_debug():
     return f"DEBUG set to: {DEBUG}"
 
 
-@app.route('/update-url', methods=['POST'])
+@app.route('/update-url', methods=['GET', 'POST'])
 def update_url():
     new_url = request.form.get('URL')
     if not new_url:
@@ -74,7 +74,8 @@ def update_url():
 
     return f"POST URL set to: {post_url_path}"
 
-@app.route('/update-testing_url', methods=['POST'])
+
+@app.route('/update-testing_url', methods=['GET', 'POST'])
 def update_testing_url():
     new_url = request.form.get('URL')
     if not new_url:
@@ -91,6 +92,7 @@ def update_testing_url():
         file.write(f"URL = \"{new_url}\"\n")
 
     return f"TEST URL set to: {post_url_path}"
+
 
 if __name__ == "__main__":
     app.run()
