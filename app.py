@@ -13,6 +13,7 @@ def forward_request(time_int):
 
     posting_url = get_posting_url()
 
+    time_int = int(time_int)
     # Sleep for 120 seconds
     time.sleep(time_int)
 
@@ -28,6 +29,8 @@ def forward_request_url_encoded(time_int):
     params = request.form
 
     posting_url = get_posting_url()
+
+    time_int = int(time_int)
 
     # Sleep for 120 seconds
     time.sleep(time_int)
