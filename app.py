@@ -6,15 +6,15 @@ from config import get_posting_url
 app = Flask(__name__)
 
 
-@app.route('/forward', methods=['GET', 'POST'])
-def forward_request():
+@app.route('/forward/<time_int>', methods=['GET', 'POST'])
+def forward_request(time_int):
     # Extract parameters from the request if needed
     params = request.json
 
     posting_url = get_posting_url()
 
     # Sleep for 120 seconds
-    time.sleep(120)
+    time.sleep(time_int)
 
     # Forward the request to the designated URL
     response = requests.post(posting_url, json=params)
@@ -22,15 +22,15 @@ def forward_request():
     return response.text
 
 
-@app.route('/forward-url-encoded', methods=['GET', 'POST'])
-def forward_request_url_encoded():
+@app.route('/forward-url-encoded/<time_int>', methods=['GET', 'POST'])
+def forward_request_url_encoded(time_int):
     # Extract parameters from the request if needed
     params = request.form
 
     posting_url = get_posting_url()
 
     # Sleep for 120 seconds
-    time.sleep(120)
+    time.sleep(time_int)
 
     # Forward the request to the designated URL, with URL-encoded parameters
     response = requests.post(posting_url, data=params)
