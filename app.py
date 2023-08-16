@@ -32,11 +32,14 @@ def forward_request_url_encoded(time_int):
 
     time_int = int(time_int)
 
-    # Sleep for 120 seconds
+    # Sleep for the designated time
     time.sleep(time_int)
 
+    # Set the Content-Type header for URL-encoded data
+    headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+
     # Forward the request to the designated URL, with URL-encoded parameters
-    response = requests.post(posting_url, data=params)
+    response = requests.post(posting_url, data=params, headers=headers)
 
     return response.text
 
